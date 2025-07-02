@@ -2,19 +2,29 @@ let resultData = [];
 
 async function search() {
   const keyword = document.getElementById("keyword").value;
-  const url = `https://search2json.onrender.com/search?q=${encodeURIComponent(
-    keyword
-  )}`;
+  const loadingEl = document.getElementById("loading");
+  const resultEl = document.getElementById("result");
+  const downloadBtn = document.getElementById("downloadBtn");
 
-  const res = await fetch(url);
-  resultData = await res.json();
+  loadingEl.style.display = "block";
+  resultEl.textContent = "";
+  downloadBtn.style.display = "none";
 
-  document.getElementById("result").textContent = JSON.stringify(
-    resultData,
-    null,
-    2
-  );
-  document.getElementById("downloadBtn").style.display = "inline-block";
+  try {
+    const url = `https://search2json.onrender.com/search?q=${encodeURIComponent(
+      keyword
+    )}`;
+    const res = await fetch(url);
+    resultData = await res.json();
+
+    resultEl.textContent = JSON.stringify(resultData, null, 2);
+    downloadBtn.style.display = "inline-block";
+  } catch (error) {
+    resultEl.textContent = "Error fetching data.";
+    console.error(error);
+  } finally {
+    loadingEl.style.display = "none";
+  }
 }
 
 function download() {

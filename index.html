@@ -3,16 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <title>Google Search Scraper</title>
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+      }
+      .form {
+        text-align: center;
+        margin-top: 10vh;
+      }
+      .result {
+        overflow-x: auto;
+      }
+    </style>
   </head>
   <body>
-    <div style="text-align: center">
-      <h2>Search Google</h2>
-      <input type="text" id="keyword" placeholder="Enter keyword" />
-      <button onclick="search()">Search</button>
-      <button id="downloadBtn" onclick="download()" style="display: none">
-        Download JSON
-      </button>
-      <pre id="result"></pre>
+    <div class="container">
+      <div class="form">
+        <h2>Search Google</h2>
+        <input type="text" id="keyword" placeholder="Enter keyword" />
+        <button onclick="search()">Search</button>
+        <button id="downloadBtn" onclick="download()" style="display: none">
+          Download JSON
+        </button>
+      </div>
+      <div class="result">
+        <div id="loading" style="display: none; margin-top: 10px">
+          Loading...
+        </div>
+        <pre id="result"></pre>
+      </div>
     </div>
 
     <script src="script.js"></script>
